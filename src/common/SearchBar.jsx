@@ -8,7 +8,7 @@ import { searchGitHubRepos } from "../redux/actions/actionCreators";
 const SearchBar = ({ data, searchGitHubRepos }) => {
   const [searchPhrase, setSearchPhrase] = useState("");
 
-  const typingStoppedInterval = 1500; //App will wait for a second and a half after user stopped typing to search
+  const typingStoppedInterval = 1000; //App will wait for a second and a half after user stopped typing to search
   let timer = null;
 
   const handleKeyPress = () => {
@@ -29,8 +29,6 @@ const SearchBar = ({ data, searchGitHubRepos }) => {
   const doneTyping = () => {
     searchGitHubRepos(searchPhrase.trim());
   };
-
-  if (data.apiReturn.items) console.log(data);
 
   return (
     <>
@@ -53,8 +51,8 @@ const SearchBar = ({ data, searchGitHubRepos }) => {
           "aria-label": "weight"
         }}
       />
-      {data.isFetching && <h4>Loading..</h4>}
-      {data.isError && <h4>Failed! </h4>}
+      {/* {data.isFetching && <h4>Loading..</h4>} */}
+      {/* {data.isError && <h4>Failed! </h4>} */}
     </>
   );
 };
