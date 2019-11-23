@@ -3,8 +3,6 @@ import Grid from "@material-ui/core/Grid";
 
 import SearchBar from "./common/SearchBar";
 
-import "./App.css";
-
 function App() {
   return (
     <div className="App">
