@@ -18,12 +18,16 @@ export const receive_error = () => {
 export const searchGitHubRepos = repoName => {
   store.dispatch(fetch_repos());
   return function(dispatch, getState) {
+    console.time("API call took: ");
     return fetch(` https://api.github.com/search/repositories?q=${repoName}`)
       .then(data => data.json())
       .then(data => {
         if (data.message === "Not Found") {
           throw new Error("No repositories were found with this name");
-        } else dispatch(receive_repos(data));
+        } else {
+          dispatch(receive_repos(data));
+          console.timeEnd("API call took: ");
+        }
       })
       .catch(err => dispatch(receive_error()));
   };
