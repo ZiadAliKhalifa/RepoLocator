@@ -27,10 +27,10 @@ const SearchBar = ({ data, searchGitHubRepos }) => {
   };
 
   const doneTyping = () => {
-    searchGitHubRepos(searchPhrase);
+    searchGitHubRepos(searchPhrase.trim());
   };
 
-  console.log(data);
+  if (data.apiReturn.items) console.log(data);
 
   return (
     <>
