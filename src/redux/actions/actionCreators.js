@@ -1,18 +1,30 @@
 import store from "../store";
-
-export const fetch_post = () => {
+export const fetch_repos = () => {
   return {
-    type: "FETCH_USER"
+    type: "FETCH_REPOS"
   };
 };
-export const receive_post = post => {
+export const receive_repos = repos => {
   return {
-    type: "FETCHED_USER",
-    data: post
+    type: "FETCHED_REPOS",
+    data: repos
   };
 };
 export const receive_error = () => {
   return {
     type: "RECEIVE_ERROR"
+  };
+};
+export const searchGitHubRepos = repoName => {
+  store.dispatch(fetch_repos());
+  return function(dispatch, getState) {
+    return fetch(` https://api.github.com/search/repositories?q=${repoName}`)
+      .then(data => data.json())
+      .then(data => {
+        if (data.message === "Not Found") {
+          throw new Error("No repositories were found with this name");
+        } else dispatch(receive_repos(data));
+      })
+      .catch(err => dispatch(receive_error()));
   };
 };
