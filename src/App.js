@@ -6,6 +6,8 @@ import Grid from "@material-ui/core/Grid";
 import SearchBar from "./components/SearchBar";
 import CircularUnderLoad from "./components/LoadingSpinner";
 import RepositoryCard from "./components/RepositoryCard";
+import NoReposFound from "./components/NoReposFound";
+import ApiFailure from "./components/ApiFailure";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -51,10 +53,13 @@ function App({ data }) {
               xs={12}
               style={{ marginTop: "2rem" }}
             >
-              {/* Implement Error Page */}
+              <ApiFailure />
             </Grid>
           )}
           <Grid item>
+            {data.apiReturn.items && !data.apiReturn.items.length && (
+              <NoReposFound />
+            )}
             {data.apiReturn.items &&
               data.apiReturn.items.map((item, key = item.id) => {
                 return (

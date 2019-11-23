@@ -20,7 +20,8 @@ const useStyles = makeStyles(theme => ({
     maxWidth: 900,
     width: 900,
     zIndex: 900,
-    margin: 15
+    margin: 15,
+    border: "1px solid #e8e8e8"
   },
   expand: {
     transform: "rotate(0deg)",
@@ -94,11 +95,14 @@ const RepositoryCard = ({ item }) => {
           {item.description}
         </Typography>
 
-        <Chip
-          label={item.language}
-          size="small"
-          style={{ marginInlineStart: "0.3rem" }}
-        />
+        {item.language && (
+          <Chip
+            label={item.language}
+            color="primary"
+            size="small"
+            style={{ marginInlineStart: "0.3rem" }}
+          />
+        )}
       </CardContent>
       <CardActions disableSpacing style={{ marginTop: "-1.6rem" }}>
         <Typography
