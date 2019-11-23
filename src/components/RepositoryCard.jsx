@@ -8,15 +8,20 @@ import clsx from "clsx";
 import Collapse from "@material-ui/core/Collapse";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
-
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import IconButton from "@material-ui/core/IconButton";
 import FaceIcon from "@material-ui/icons/Face";
 import BusinessIcon from "@material-ui/icons/Business";
 import Tooltip from "@material-ui/core/Tooltip";
+import Chip from "@material-ui/core/Chip";
 
 const useStyles = makeStyles(theme => ({
   card: {
-    maxWidth: 800,
-    width: 800
+    maxWidth: 900,
+    width: 900,
+    zIndex: 900,
+    margin: 10,
+    backgroundColor: "#0000"
   },
   expand: {
     transform: "rotate(0deg)",
@@ -45,27 +50,35 @@ const RepositoryCard = ({ item }) => {
     <Card className={classes.card}>
       <CardHeader
         avatar={
-          <Avatar
-            aria-label="recipe"
-            className={classes.avatar}
-            src={item.owner.avatar_url}
-          />
+          <>
+            {item.owner.avatar_url && (
+              <Avatar
+                aria-label="avatar"
+                className={classes.avatar}
+                src={item.owner.avatar_url}
+              />
+            )}
+          </>
         }
         action={
           <>
             {item.owner.type === "User" && (
-              <Tooltip title="User" aria-label="Tooltip">
+              <Tooltip title="Owned by a user" aria-label="Tooltip">
                 <FaceIcon className={classes.ownerTypeIcon} />
               </Tooltip>
             )}
             {item.owner.type !== "User" && (
-              <Tooltip title="Organization" aria-label="Tooltip">
+              <Tooltip title="Owned by an organization" aria-label="Tooltip">
                 <BusinessIcon className={classes.ownerTypeIcon} />
               </Tooltip>
             )}
           </>
         }
-        title={item.name}
+        title={
+          <>
+            <strong>{item.name}</strong>
+          </>
+        }
         subheader={item.owner.login}
       />
       <CardContent>
@@ -73,13 +86,52 @@ const RepositoryCard = ({ item }) => {
           variant="body2"
           color="textSecondary"
           component="p"
-          style={{ marginInlineStart: "1rem" }}
+          style={{
+            marginInlineStart: "2rem",
+            marginBottom: "1rem",
+            marginTop: "-1rem"
+          }}
         >
           {item.description}
         </Typography>
+
+        <Chip
+          label={item.language}
+          size="small"
+          style={{ marginInlineStart: "0.3rem" }}
+        />
       </CardContent>
-      <CardActions disableSpacing></CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
+      <CardActions disableSpacing style={{ marginTop: "-1.6rem" }}>
+        <Typography
+          variant="body2"
+          color="primary"
+          component="p"
+          style={{ marginInlineStart: "1rem" }}
+        >
+          <strong>Forks: </strong>
+          {item.forks_count}
+        </Typography>
+        <Typography
+          variant="body2"
+          color="primary"
+          component="p"
+          style={{ marginInlineStart: "1rem" }}
+        >
+          <strong>Watchers: </strong>
+          {item.watchers}
+        </Typography>
+        <IconButton
+          className={clsx(classes.expand, {
+            [classes.expandOpen]: expanded
+          })}
+          onClick={handleExpandClick}
+          aria-expanded={expanded}
+          aria-label="show more"
+        >
+          <ExpandMoreIcon />
+        </IconButton>
+      </CardActions>
+      <Collapse in={expanded} timeout="auto">
         <CardContent>
           <Typography paragraph>Method:</Typography>
           <Typography paragraph>

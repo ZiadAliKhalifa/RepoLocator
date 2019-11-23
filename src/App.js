@@ -2,10 +2,10 @@ import React from "react";
 import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
 
-import SearchBar from "./common/SearchBar";
-import CircularUnderLoad from "./common/LoadingSpinner";
+import SearchBar from "./components/SearchBar";
+import CircularUnderLoad from "./components/LoadingSpinner";
+import RepositoryCard from "./components/RepositoryCard";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -16,10 +16,7 @@ const useStyles = makeStyles(theme => ({
     textAlign: "center",
     color: theme.palette.text.secondary
   },
-  SearchBar: {
-    padding: "1rem",
-    marginBottom: 2
-  }
+  App: {}
 }));
 
 function App({ data }) {
@@ -57,18 +54,16 @@ function App({ data }) {
               {/* Implement Error Page */}
             </Grid>
           )}
-          {data.apiReturn.items && (
-            <Grid
-              item
-              className={classes.paper}
-              xl={12}
-              sm={12}
-              xs={12}
-              style={{ marginTop: "2rem" }}
-            >
-              {/* Implement Display List */}
-            </Grid>
-          )}
+          <Grid item>
+            {data.apiReturn.items &&
+              data.apiReturn.items.map((item, key = item.id) => {
+                return (
+                  <Grid item sm={12}>
+                    <RepositoryCard item={item} key={key} />
+                  </Grid>
+                );
+              })}
+          </Grid>
         </Grid>
       </div>
     </div>
