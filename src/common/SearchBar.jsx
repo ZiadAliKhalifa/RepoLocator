@@ -1,8 +1,11 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import { Input, InputAdornment } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 
-const SearchBar = () => {
+import { searchGitHubRepos } from "../redux/actions/actionCreators";
+
+const SearchBar = ({ data, searchGitHubRepos }) => {
   const [searchPhrase, setSearchPhrase] = useState("");
 
   const typingStoppedInterval = 1500; //App will wait for a second and a half after user stopped typing to search
@@ -24,8 +27,10 @@ const SearchBar = () => {
   };
 
   const doneTyping = () => {
-    //Trigger API call
+    searchGitHubRepos(searchPhrase);
   };
+
+  console.log(data);
 
   return (
     <>
@@ -48,8 +53,20 @@ const SearchBar = () => {
           "aria-label": "weight"
         }}
       />
+      {data.isFetching && <h4>Loading..</h4>}
+      {data.isError && <h4>Failed! </h4>}
     </>
   );
 };
 
-export default SearchBar;
+const mapStateToProps = state => {
+  return {
+    data: state
+  };
+};
+
+const mapDispatchToProps = {
+  searchGitHubRepos
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);
