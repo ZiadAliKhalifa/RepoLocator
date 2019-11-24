@@ -1,4 +1,6 @@
 import store from "../store";
+import URLs from "../../consts/URLs";
+
 export const fetch_repos = () => {
   return {
     type: "FETCH_REPOS"
@@ -19,7 +21,7 @@ export const searchGitHubRepos = repoName => {
   store.dispatch(fetch_repos());
   return function(dispatch, getState) {
     console.time("API call took: ");
-    return fetch(` https://api.github.com/search/repositories?q=${repoName}`)
+    return fetch(`${URLs.GITHUB_SEARCH_URL}?q=${repoName}`)
       .then(data => data.json())
       .then(data => {
         if (data.message === "Not Found") {
