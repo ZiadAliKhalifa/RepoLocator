@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 
+import HeaderBar from "./components/Header";
 import SearchBar from "./components/SearchBar";
 import CircularUnderLoad from "./components/LoadingSpinner";
 import RepositoryCard from "./components/RepositoryCard";
@@ -27,6 +28,7 @@ function App({ data }) {
 
   return (
     <div className="App">
+      <HeaderBar />
       <div className={classes.root}>
         <Grid container justify="center">
           <Grid item className={classes.paper} xl={12} sm={12} xs={12}>
