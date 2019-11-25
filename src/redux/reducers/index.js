@@ -9,7 +9,7 @@ const initialState = {
 const asyncReducer = (state = initialState, action) => {
   switch (action.type) {
     case "FETCH_REPOS":
-      if (state.pageNumber == 1) {
+      if (state.pageNumber === 1) {
         return Object.assign({}, state, {
           apiReturn: {},
           isFetching: true,
@@ -29,7 +29,7 @@ const asyncReducer = (state = initialState, action) => {
 
     case "FETCHED_REPOS":
       let dataToSet = { ...action.data };
-      if (state.pageNumber == 1) {
+      if (state.pageNumber === 1) {
         return Object.assign({}, state, {
           apiReturn: dataToSet,
           isFetching: false,

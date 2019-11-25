@@ -66,9 +66,9 @@ function App({ data }) {
             </Grid>
           )}
           <Grid item>
-            {data.apiReturn.items && !data.apiReturn.items.length && (
-              <NoReposFound />
-            )}
+            {data.apiReturn.items &&
+              !data.apiReturn.items.length &&
+              !data.isFetching && <NoReposFound />}
             {data.apiReturn.items &&
               data.apiReturn.items.map((item, key = item.id) => {
                 return (
