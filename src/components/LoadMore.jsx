@@ -26,7 +26,7 @@ const LoadMore = ({ data, searchGitHubRepos }) => {
         </Button>
       )}
 
-      {data.apiReturn > 20 && (
+      {data.apiReturn.items.length > 29 && (
         <Button size="large" color="primary" onClick={handleNextPageClick}>
           <strong>Next page</strong>
         </Button>
