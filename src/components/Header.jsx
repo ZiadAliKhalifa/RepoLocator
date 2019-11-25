@@ -16,12 +16,10 @@ export default function HeaderBar() {
       <Toolbar>
         <img src={logo} alt="Repolocator logo" style={{ height: "6rem" }} />
         <IconButton
-          edge="false"
           justify="right"
           color="inherit"
           aria-label="linkedIn"
           style={{ marginLeft: "auto" }}
-          cssClass="e-link"
           onClick={goToZiadLinkedIn}
         >
           <LinkedInIcon />
