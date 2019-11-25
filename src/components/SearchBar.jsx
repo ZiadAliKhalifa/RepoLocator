@@ -6,7 +6,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import {
   searchGitHubRepos,
   setCentralSearchPhrase
-} from "../redux/actions/actionCreators";
+} from "../redux/actions/searchActions";
 
 const SearchBar = ({ data, searchGitHubRepos }) => {
   const [searchPhrase, setSearchPhrase] = useState("");
