@@ -9,6 +9,7 @@ import CircularUnderLoad from "./components/LoadingSpinner";
 import RepositoryCard from "./components/RepositoryCard";
 import NoReposFound from "./components/NoReposFound";
 import ApiFailure from "./components/ApiFailure";
+import LoadMore from "./components/LoadMore";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -30,7 +31,13 @@ function App({ data }) {
     <div className="App">
       <HeaderBar />
       <div className={classes.root}>
-        <Grid container justify="center">
+        <Grid
+          container
+          justify="center"
+          spacing={0}
+          direction="column"
+          alignItems="center"
+        >
           <Grid item className={classes.paper} xl={12} sm={12} xs={12}>
             <SearchBar />
           </Grid>
@@ -71,6 +78,11 @@ function App({ data }) {
                 );
               })}
           </Grid>
+          {data.apiReturn.items && data.apiReturn.items.length > 0 && (
+            <Grid item sm={12}>
+              <LoadMore />
+            </Grid>
+          )}
         </Grid>
       </div>
     </div>
