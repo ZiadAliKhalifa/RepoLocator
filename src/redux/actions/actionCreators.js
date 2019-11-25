@@ -1,4 +1,3 @@
-
 export const fetch_repos = () => {
   return {
     type: "FETCH_REPOS"
@@ -35,3 +34,20 @@ export const decrement_page_counter = () => {
   };
 };
 
+export const load_repository_info = () => {
+  return {
+    type: "LOAD_REPOSITORY_INFO"
+  };
+};
+
+export const recieve_repository_info = () => {
+  return {
+    type: "RECIEVE_REPOSITORY_INFO"
+  };
+};
+
+export const fail_repository_info = () => {
+  return {
+    type: "FAIL_REPOSITORY_INFO"
+  };
+};
