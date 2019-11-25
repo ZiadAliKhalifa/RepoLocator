@@ -36,7 +36,7 @@ const useStyles = makeStyles(theme => ({
   footer: {
     display: "block",
     padding: "20px",
-    height: "4  0px",
+    height: "40px",
     width: "100%"
   }
 }));
