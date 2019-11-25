@@ -18,6 +18,13 @@ export const receive_error = () => {
   };
 };
 
+export const set_search_phrase = searchPhrase => {
+  return {
+    type: "SET_SEARCH_PHRASE",
+    data: searchPhrase
+  };
+};
+
 export const searchGitHubRepos = (repoName, pageNumber) => {
   store.dispatch(fetch_repos());
   return function(dispatch, getState) {
@@ -36,4 +43,8 @@ export const searchGitHubRepos = (repoName, pageNumber) => {
       })
       .catch(err => dispatch(receive_error()));
   };
+};
+
+export const setCentralSearchPhrase = searchPhrase => {
+  store.dispatch(set_search_phrase(searchPhrase));
 };

@@ -3,7 +3,10 @@ import { connect } from "react-redux";
 import { Input, InputAdornment } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 
-import { searchGitHubRepos } from "../redux/actions/actionCreators";
+import {
+  searchGitHubRepos,
+  setCentralSearchPhrase
+} from "../redux/actions/actionCreators";
 
 const SearchBar = ({ data, searchGitHubRepos }) => {
   const [searchPhrase, setSearchPhrase] = useState("");
@@ -28,6 +31,7 @@ const SearchBar = ({ data, searchGitHubRepos }) => {
 
   const doneTyping = () => {
     searchGitHubRepos(searchPhrase.trim(), data.pageNumber);
+    setCentralSearchPhrase(searchPhrase);
   };
 
   return (
@@ -51,8 +55,6 @@ const SearchBar = ({ data, searchGitHubRepos }) => {
           "aria-label": "weight"
         }}
       />
-      {/* {data.isFetching && <h4>Loading..</h4>} */}
-      {/* {data.isError && <h4>Failed! </h4>} */}
     </>
   );
 };
@@ -64,7 +66,8 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-  searchGitHubRepos
+  searchGitHubRepos,
+  setCentralSearchPhrase
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);
