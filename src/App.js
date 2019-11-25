@@ -10,6 +10,7 @@ import RepositoryCard from "./components/RepositoryCard";
 import NoReposFound from "./components/NoReposFound";
 import ApiFailure from "./components/ApiFailure";
 import LoadMore from "./components/LoadMore";
+import FrontPage from "./components/FrontPage";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -41,6 +42,12 @@ function App({ data }) {
           <Grid item className={classes.paper} xl={12} sm={12} xs={12}>
             <SearchBar />
           </Grid>
+          {!data.isFetching && !data.isError && !data.apiReturn.items && (
+            <Grid item className={classes.paper} xl={12} sm={12} xs={12}>
+              <FrontPage />
+            </Grid>
+          )}
+
           {data.isFetching && (
             <Grid
               item
