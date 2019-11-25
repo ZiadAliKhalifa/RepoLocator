@@ -6,6 +6,7 @@ import {
   incrementPageCounter,
   decrementPageCounter
 } from "../redux/actions/actionCreators";
+import { Chip } from "@material-ui/core";
 
 const LoadMore = ({ data, searchGitHubRepos }) => {
   const handleNextPageClick = () => {
@@ -21,9 +22,12 @@ const LoadMore = ({ data, searchGitHubRepos }) => {
   return (
     <>
       {data.pageNumber > 1 && (
-        <Button size="large" color="primary" onClick={handlePrevPageClick}>
-          <strong>Previous page</strong>
-        </Button>
+        <>
+          <Button size="large" color="primary" onClick={handlePrevPageClick}>
+            <strong>Previous page</strong>
+          </Button>
+          <Chip label={data.pageNumber} color="primary" size="small" />
+        </>
       )}
 
       {data.apiReturn.items.length > 29 && (
