@@ -25,11 +25,16 @@ export const set_search_phrase = searchPhrase => {
   };
 };
 
+export const increment_page_counter = () => {
+  return {
+    type: "INCREMENT_PAGE_COUNTER"
+  };
+};
+
 export const searchGitHubRepos = (repoName, pageNumber) => {
   store.dispatch(fetch_repos());
   return function(dispatch, getState) {
     console.time("API call took: ");
-    console.log("This is page number: " + pageNumber);
 
     return fetch(`${URLs.GITHUB_SEARCH_URL}?q=${repoName}&page=${pageNumber}`)
       .then(data => data.json())
@@ -47,4 +52,8 @@ export const searchGitHubRepos = (repoName, pageNumber) => {
 
 export const setCentralSearchPhrase = searchPhrase => {
   store.dispatch(set_search_phrase(searchPhrase));
+};
+
+export const incrementPageCounter = () => {
+  store.dispatch(increment_page_counter());
 };

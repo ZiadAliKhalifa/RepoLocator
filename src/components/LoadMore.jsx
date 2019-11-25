@@ -1,12 +1,17 @@
 import React from "react";
 import { connect } from "react-redux";
 import Button from "@material-ui/core/Button";
+import {
+  searchGitHubRepos,
+  incrementPageCounter
+} from "../redux/actions/actionCreators";
 
-const handleLoadMoreClick = () => {
-  console.log("I have been clicked!");
-};
+const LoadMore = ({ data, searchGitHubRepos }) => {
+  const handleLoadMoreClick = () => {
+    searchGitHubRepos(data.searchPhrase, data.pageNumber + 1);
+    incrementPageCounter();
+  };
 
-const LoadMore = () => {
   return (
     <Button size="large" color="primary" onClick={handleLoadMoreClick}>
       <strong>Load more...</strong>
@@ -21,7 +26,8 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-  //   incrementPageCounter
+  searchGitHubRepos,
+  incrementPageCounter
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoadMore);
