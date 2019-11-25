@@ -5,7 +5,7 @@ import {
   searchGitHubRepos,
   incrementPageCounter,
   decrementPageCounter
-} from "../redux/actions/actionCreators";
+} from "../redux/actions/searchActions";
 import { Chip } from "@material-ui/core";
 
 const LoadMore = ({ data, searchGitHubRepos }) => {
