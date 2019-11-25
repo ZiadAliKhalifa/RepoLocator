@@ -3,19 +3,35 @@ import { connect } from "react-redux";
 import Button from "@material-ui/core/Button";
 import {
   searchGitHubRepos,
-  incrementPageCounter
+  incrementPageCounter,
+  decrementPageCounter
 } from "../redux/actions/actionCreators";
 
 const LoadMore = ({ data, searchGitHubRepos }) => {
-  const handleLoadMoreClick = () => {
+  const handleNextPageClick = () => {
     searchGitHubRepos(data.searchPhrase, data.pageNumber + 1);
     incrementPageCounter();
   };
 
+  const handlePrevPageClick = () => {
+    searchGitHubRepos(data.searchPhrase, data.pageNumber - 1);
+    decrementPageCounter();
+  };
+
   return (
-    <Button size="large" color="primary" onClick={handleLoadMoreClick}>
-      <strong>Load more...</strong>
-    </Button>
+    <>
+      {data.pageNumber > 1 && (
+        <Button size="large" color="primary" onClick={handlePrevPageClick}>
+          <strong>Previous page</strong>
+        </Button>
+      )}
+
+      {data.apiReturn > 20 && (
+        <Button size="large" color="primary" onClick={handleNextPageClick}>
+          <strong>Next page</strong>
+        </Button>
+      )}
+    </>
   );
 };
 
@@ -27,7 +43,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
   searchGitHubRepos,
-  incrementPageCounter
+  incrementPageCounter,
+  decrementPageCounter
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoadMore);

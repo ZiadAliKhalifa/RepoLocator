@@ -31,6 +31,12 @@ export const increment_page_counter = () => {
   };
 };
 
+export const decrement_page_counter = () => {
+  return {
+    type: "DECREMENT_PAGE_COUNTER"
+  };
+};
+
 export const searchGitHubRepos = (repoName, pageNumber) => {
   store.dispatch(fetch_repos());
   return function(dispatch, getState) {
@@ -56,4 +62,8 @@ export const setCentralSearchPhrase = searchPhrase => {
 
 export const incrementPageCounter = () => {
   store.dispatch(increment_page_counter());
+};
+
+export const decrementPageCounter = () => {
+  store.dispatch(decrement_page_counter());
 };
