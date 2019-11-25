@@ -27,7 +27,7 @@ const SearchBar = ({ data, searchGitHubRepos }) => {
   };
 
   const doneTyping = () => {
-    searchGitHubRepos(searchPhrase.trim());
+    searchGitHubRepos(searchPhrase.trim(), data.pageNumber);
   };
 
   return (

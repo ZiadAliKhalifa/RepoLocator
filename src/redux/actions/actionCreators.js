@@ -17,11 +17,14 @@ export const receive_error = () => {
     type: "RECEIVE_ERROR"
   };
 };
-export const searchGitHubRepos = repoName => {
+
+export const searchGitHubRepos = (repoName, pageNumber) => {
   store.dispatch(fetch_repos());
   return function(dispatch, getState) {
     console.time("API call took: ");
-    return fetch(`${URLs.GITHUB_SEARCH_URL}?q=${repoName}`)
+    console.log("This is page number: " + pageNumber);
+
+    return fetch(`${URLs.GITHUB_SEARCH_URL}?q=${repoName}&page=${pageNumber}`)
       .then(data => data.json())
       .then(data => {
         if (data.message === "Not Found") {
