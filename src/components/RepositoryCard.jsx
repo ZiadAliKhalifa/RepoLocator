@@ -1,4 +1,6 @@
 import React from "react";
+import { connect } from "react-redux";
+
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -15,6 +17,8 @@ import BusinessIcon from "@material-ui/icons/Business";
 import Tooltip from "@material-ui/core/Tooltip";
 import Chip from "@material-ui/core/Chip";
 import RepositoryInfo from "./RepositoryInfo";
+
+import { loadRepositoryInfo } from "../redux/actions/repositoryActions";
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -39,13 +43,13 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const RepositoryCard = ({ item, id }) => {
+const RepositoryCard = ({ item, loadRepositoryInfo }) => {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
-  const handleExpandClick = () => {
+  const handleExpandClick = async () => {
     setExpanded(!expanded);
-    console.log(item);
+    let dataForThisRepo = await loadRepositoryInfo(item.full_name);
   };
 
   return (
@@ -90,13 +94,14 @@ const RepositoryCard = ({ item, id }) => {
           component="p"
           style={{
             marginInlineStart: "2rem",
-            marginBottom: "1rem",
-            marginTop: "-1rem"
+            marginBottom: "1rem"
+            // marginTop: "-1rem"
           }}
         >
           {item.description}
         </Typography>
-
+      </CardContent>
+      <CardActions disableSpacing style={{ marginTop: "-2rem" }}>
         {item.language && (
           <Chip
             label={item.language}
@@ -105,26 +110,6 @@ const RepositoryCard = ({ item, id }) => {
             style={{ marginInlineStart: "0.3rem" }}
           />
         )}
-      </CardContent>
-      <CardActions disableSpacing style={{ marginTop: "-1.6rem" }}>
-        <Typography
-          variant="body2"
-          color="primary"
-          component="p"
-          style={{ marginInlineStart: "1rem" }}
-        >
-          <strong>Forks: </strong>
-          {item.forks_count}
-        </Typography>
-        <Typography
-          variant="body2"
-          color="primary"
-          component="p"
-          style={{ marginInlineStart: "1rem" }}
-        >
-          <strong>Watchers: </strong>
-          {item.watchers}
-        </Typography>
         <IconButton
           className={clsx(classes.expand, {
             [classes.expandOpen]: expanded
@@ -138,11 +123,21 @@ const RepositoryCard = ({ item, id }) => {
       </CardActions>
       <Collapse in={expanded} timeout="auto">
         <CardContent>
-          <RepositoryInfo />
+          <RepositoryInfo item={item} />
         </CardContent>
       </Collapse>
     </Card>
   );
 };
 
-export default RepositoryCard;
+const mapStateToProps = state => {
+  return {
+    data: state
+  };
+};
+
+const mapDispatchToProps = {
+  loadRepositoryInfo
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(RepositoryCard);
