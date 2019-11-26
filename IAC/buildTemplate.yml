@@ -51,60 +51,6 @@ Conditions:
   IsStage: !Equals [!Ref Stage, "release"]
 
 Resources:
-  # IAM group with ReadOnly access on the services that were created
-  ReadOnlyIAMGroup:
-    Type: AWS::IAM::Group
-    Properties:
-      GroupName: !Join
-        - "-"
-        - - !Ref ProjectName
-          - !Ref Stage
-          - "Read-Only-Group"
-      Path: /
-      Policies:
-        - PolicyName: !Join
-            - "-"
-            - - !Ref ProjectName
-              - !Ref Stage
-              - "Read-Only-Policy"
-          PolicyDocument:
-            Version: 2012-10-17
-            Statement:
-              - Effect: Allow
-                Action:
-                  - "logs:Describe*"
-                  - "logs:Get*"
-                  - "logs:FilterLogEvents"
-                  - "logs:ListTagsLogGroup"
-                  - "logs:StartQuery"
-                  - "logs:TestMetricFilter"
-                  - "iam:Generate*"
-                  - "iam:Get*"
-                  - "iam:List*"
-                  - "iam:Simulate*"
-                  - "apigateway:GET"
-                  - "states:List*"
-                  - "states:Describe*"
-                  - "states:GetExecutionHistory"
-                  - "lambda:List*"
-                  - "lambda:Get*"
-                  - "s3:Get*"
-                  - "s3:List*"
-                  - "s3:Head*"
-                  - "cloudwatch:Describe*"
-                  - "cloudwatch:Get*"
-                  - "cloudwatch:List*"
-                  - "cloudformation:Describe*"
-                  - "cloudformation:Detect*"
-                  - "cloudformation:Get*"
-                  - "cloudformation:List*"
-                  - "cloudformation:Estimate*"
-                  - "cloudformation:Preview*"
-                  - "codebuild:BatchGet*"
-                  - "codebuild:List*"
-                  - "states:*"
-                Resource: "*"
-
   # Frontend resources
   DeploymentBucket:
     Type: AWS::S3::Bucket
