@@ -51,3 +51,21 @@ export const fail_repository_info = () => {
     type: "FAIL_REPOSITORY_INFO"
   };
 };
+
+export const download_repository_readme = () => {
+  return {
+    type: "DOWNLOAD_REPOSITORY_README"
+  };
+};
+
+export const recieve_repository_readme = () => {
+  return {
+    type: "RECIEVE_REPOSITORY_README"
+  };
+};
+
+export const fail_readme_download = () => {
+  return {
+    type: "FAIL_README_DOWNLOAD"
+  };
+};

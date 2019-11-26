@@ -46,10 +46,13 @@ const useStyles = makeStyles(theme => ({
 const RepositoryCard = ({ item, loadRepositoryInfo }) => {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
+  const [readme, setReadme] = React.useState(false);
 
   const handleExpandClick = async () => {
     setExpanded(!expanded);
     let dataForThisRepo = await loadRepositoryInfo(item.full_name);
+    console.log(dataForThisRepo);
+    setReadme(dataForThisRepo);
   };
 
   return (
@@ -107,7 +110,7 @@ const RepositoryCard = ({ item, loadRepositoryInfo }) => {
             label={item.language}
             color="primary"
             size="small"
-            style={{ marginInlineStart: "0.3rem" }}
+            style={{ marginInlineStart: "2.3rem" }}
           />
         )}
         <IconButton
@@ -123,7 +126,7 @@ const RepositoryCard = ({ item, loadRepositoryInfo }) => {
       </CardActions>
       <Collapse in={expanded} timeout="auto">
         <CardContent>
-          <RepositoryInfo item={item} />
+          <RepositoryInfo item={item} readmeObject={readme} />
         </CardContent>
       </Collapse>
     </Card>

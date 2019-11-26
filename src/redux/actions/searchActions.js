@@ -12,7 +12,7 @@ import {
 export const searchGitHubRepos = (repoName, pageNumber) => {
   store.dispatch(fetch_repos());
   return function(dispatch, getState) {
-    console.time("API call took: ");
+    console.time("Search API call took: ");
 
     return fetch(`${URLs.GITHUB_SEARCH_URL}?q=${repoName}&page=${pageNumber}`)
       .then(data => data.json())
@@ -21,7 +21,7 @@ export const searchGitHubRepos = (repoName, pageNumber) => {
           throw new Error("No repositories were found with this name");
         } else {
           dispatch(receive_repos(data));
-          console.timeEnd("API call took: ");
+          console.timeEnd("Search API call took: ");
         }
       })
       .catch(err => dispatch(receive_error()));

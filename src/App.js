@@ -105,11 +105,11 @@ function App({ data }) {
               <LoadMore />
             </Grid>
           )}
-          <Grid item className={classes.paper} xl={12} sm={12} xs={12}>
+          {/* <Grid item className={classes.paper} xl={12} sm={12} xs={12}>
             <div className={classes.fixer}>
               <Footer className={classes.footer} />
             </div>
-          </Grid>
+          </Grid> */}
         </Grid>
       </div>
     </div>
