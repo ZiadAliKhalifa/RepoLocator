@@ -13,7 +13,7 @@ export const loadRepositoryReadme = link => {
     console.time("Readme download call took: ");
 
     return fetch(link)
-      .then(data => data.json())
+      .then(data => data)
       .then(data => {
         if (data.message === "Not Found") {
           throw new Error("No such readme");
@@ -23,7 +23,9 @@ export const loadRepositoryReadme = link => {
           return data;
         }
       })
-      .catch(err => dispatch(fail_readme_download()));
+      .catch(err => {
+        dispatch(fail_readme_download());
+      });
   };
 };
 

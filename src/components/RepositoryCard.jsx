@@ -19,6 +19,7 @@ import Chip from "@material-ui/core/Chip";
 import RepositoryInfo from "./RepositoryInfo";
 
 import { loadRepositoryInfo } from "../redux/actions/repositoryActions";
+import { loadRepositoryReadme } from "../redux/actions/readmeActions";
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -43,16 +44,20 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const RepositoryCard = ({ item, loadRepositoryInfo }) => {
+const RepositoryCard = ({ item, loadRepositoryInfo, loadRepositoryReadme }) => {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
-  const [readme, setReadme] = React.useState(false);
+  const [readme, setReadme] = React.useState("");
+  const [readmeText, setReadmeText] = React.useState("");
 
   const handleExpandClick = async () => {
     setExpanded(!expanded);
     let dataForThisRepo = await loadRepositoryInfo(item.full_name);
-    console.log(dataForThisRepo);
     setReadme(dataForThisRepo);
+    let readMeFile = await loadRepositoryReadme(dataForThisRepo.download_url);
+    readMeFile.text().then(text => {
+      setReadmeText(text);
+    });
   };
 
   return (
@@ -98,7 +103,6 @@ const RepositoryCard = ({ item, loadRepositoryInfo }) => {
           style={{
             marginInlineStart: "2rem",
             marginBottom: "1rem"
-            // marginTop: "-1rem"
           }}
         >
           {item.description}
@@ -126,7 +130,11 @@ const RepositoryCard = ({ item, loadRepositoryInfo }) => {
       </CardActions>
       <Collapse in={expanded} timeout="auto">
         <CardContent>
-          <RepositoryInfo item={item} readmeObject={readme} />
+          <RepositoryInfo
+            item={item}
+            readmeObject={readme}
+            readmeText={readmeText}
+          />
         </CardContent>
       </Collapse>
     </Card>
@@ -140,6 +148,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
+  loadRepositoryReadme,
   loadRepositoryInfo
 };
 
