@@ -42,13 +42,11 @@ const asyncReducer = (state = initialState, action) => {
     case "INCREMENT_PAGE_COUNTER":
       let stateToChange = { ...state };
       stateToChange.pageNumber = stateToChange.pageNumber + 1;
-      console.log(stateToChange);
       return Object.assign({}, state, stateToChange);
 
     case "DECREMENT_PAGE_COUNTER":
       let stateToDec = { ...state };
       stateToDec.pageNumber = stateToDec.pageNumber - 1;
-      console.log(stateToDec);
       return Object.assign({}, state, stateToDec);
 
     default:

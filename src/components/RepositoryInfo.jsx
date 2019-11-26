@@ -9,8 +9,6 @@ import CircularUnderLoad from "./LoadingSpinner";
 import { loadRepositoryReadme } from "../redux/actions/readmeActions";
 
 const RepositoryInfo = ({ item, readmeObject, readmeText }) => {
-  console.log(readmeText);
-
   return (
     <Grid container justify="center" spacing={3}>
       <Grid item>

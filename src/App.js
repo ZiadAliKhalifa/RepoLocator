@@ -11,6 +11,7 @@ import NoReposFound from "./components/NoReposFound";
 import ApiFailure from "./components/ApiFailure";
 import LoadMore from "./components/LoadMore";
 import FrontPage from "./components/FrontPage";
+import LoadingSkeleton from "./components/LoadingSpinner";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -25,7 +26,6 @@ const useStyles = makeStyles(theme => ({
 
 function App({ data }) {
   const classes = useStyles();
-  console.log(data);
 
   return (
     <div className="App">
@@ -48,17 +48,13 @@ function App({ data }) {
           )}
 
           {data.isFetching && (
-            <Grid
-              item
-              className={classes.paper}
-              xl={12}
-              sm={12}
-              xs={12}
-              style={{ marginTop: "2rem" }}
-            >
-              <CircularUnderLoad />
-            </Grid>
+            <>
+              <LoadingSkeleton />
+              <LoadingSkeleton />
+              <LoadingSkeleton />
+            </>
           )}
+
           {data.isError && (
             <Grid
               item
