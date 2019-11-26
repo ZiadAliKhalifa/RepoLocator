@@ -1,17 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
 import moment from "moment";
 import ReactMarkdown from "react-markdown";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 
 import CircularUnderLoad from "./LoadingSpinner";
-import { loadRepositoryInfo } from "../redux/actions/repositoryActions";
+import { loadRepositoryReadme } from "../redux/actions/readmeActions";
 
-export default function RepositoryInfo({ item, readmeObject }) {
-  console.log(item);
-  console.log(readmeObject);
-
-  // useEffect((),[readmeObject])
+const RepositoryInfo = ({ item, readmeObject, readmeText }) => {
+  console.log(readmeText);
 
   return (
     <Grid container justify="center" spacing={3}>
@@ -47,13 +45,28 @@ export default function RepositoryInfo({ item, readmeObject }) {
         </Typography>
       </Grid>
 
-      {/* {readmeObject && (
+      {!readmeObject && (
         <Grid item sm={12} xs={12}>
           <CircularUnderLoad />
-         </Grid>
+        </Grid>
+      )}
 
-         <ReactMarkdown source={readmeObject} />
-       )} */}
+      {readmeObject && (
+        <Grid item style={{ padding: "3rem" }}>
+          <ReactMarkdown
+            source={readmeText}
+            skipHtml
+            escapeHtml
+            disallowedTypes={["image"]}
+          />
+        </Grid>
+      )}
     </Grid>
   );
-}
+};
+
+const mapDispatchToProps = {
+  loadRepositoryReadme
+};
+
+export default connect(null, mapDispatchToProps)(RepositoryInfo);

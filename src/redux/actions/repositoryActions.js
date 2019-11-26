@@ -6,7 +6,6 @@ import {
   fail_repository_info
 } from "./actionCreators";
 
-//Implement load more data for a repository
 export const loadRepositoryInfo = fullName => {
   store.dispatch(load_repository_info());
   return function(dispatch, getState) {
@@ -26,5 +25,3 @@ export const loadRepositoryInfo = fullName => {
       .catch(err => dispatch(fail_repository_info()));
   };
 };
-
-//Implement load read.me for a repository
