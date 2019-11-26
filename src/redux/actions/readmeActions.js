@@ -1,5 +1,5 @@
 import store from "../store";
-import URLs from "../../consts/URLs";
+
 import {
   download_repository_readme,
   recieve_repository_readme,
@@ -28,5 +28,3 @@ export const loadRepositoryReadme = link => {
       });
   };
 };
-
-//Implement load read.me for a repository
