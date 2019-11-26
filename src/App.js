@@ -94,11 +94,9 @@ function App({ data }) {
               !data.apiReturn.items.length &&
               !data.isFetching && <NoReposFound />}
             {data.apiReturn.items &&
-              data.apiReturn.items.map((item, key = item.id) => {
+              data.apiReturn.items.map(item => {
                 return (
-                  <Grid item sm={12}>
-                    <RepositoryCard item={item} key={key} />
-                  </Grid>
+                  <RepositoryCard item={item} key={item.node_id} id={item.id} />
                 );
               })}
           </Grid>

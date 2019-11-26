@@ -39,12 +39,13 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const RepositoryCard = ({ item }) => {
+const RepositoryCard = ({ item, id }) => {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
+    console.log(item);
   };
 
   return (
@@ -137,7 +138,7 @@ const RepositoryCard = ({ item }) => {
       </CardActions>
       <Collapse in={expanded} timeout="auto">
         <CardContent>
-          <RepositoryInfo repositoryInfo={{}} />
+          <RepositoryInfo />
         </CardContent>
       </Collapse>
     </Card>
