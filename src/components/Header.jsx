@@ -15,6 +15,7 @@ export default function HeaderBar() {
     <AppBar position="static" style={{ marginBottom: "2rem" }}>
       <Toolbar>
         <img src={logo} alt="Repolocator logo" style={{ height: "6rem" }} />
+
         <IconButton
           justify="right"
           color="inherit"
