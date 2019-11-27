@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 
 import Login from "./Login";
 import LoadingSkeleton from "../components/LoadingSpinner";
@@ -14,13 +15,15 @@ const useStyles = makeStyles(theme => ({
   },
   paper: {
     padding: theme.spacing(2),
-    textAlign: "center",
     color: theme.palette.text.secondary
   }
 }));
 
 const MyRepositories = ({ data }) => {
   const classes = useStyles();
+  const [userSubmittedCredentials, setUserSubmittedCredentials] = useState(
+    false
+  );
 
   return (
     <>
@@ -31,29 +34,48 @@ const MyRepositories = ({ data }) => {
         direction="column"
         alignItems="center"
       >
-        <Grid item className={classes.paper} xl={12} sm={12} xs={12}>
-          <Login />
+        {userSubmittedCredentials && (
+          <Grid item className={classes.paper} xl={12} sm={12} xs={12}>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={e => {
+                setUserSubmittedCredentials(false);
+              }}
+            >
+              Change Credentials
+            </Button>
+          </Grid>
+        )}
+        {!userSubmittedCredentials && (
+          <Grid item className={classes.paper} xl={12} sm={12} xs={12}>
+            <Login setUserSubmittedCredentials={setUserSubmittedCredentials} />
+          </Grid>
+        )}
+        <Grid item xl={12} sm={12} xs={12}>
+          {userSubmittedCredentials &&
+            !data.userData.userApiReturn.length &&
+            data.userData.isFetchingUserRepos && (
+              <>
+                <LoadingSkeleton />
+                <LoadingSkeleton />
+                <LoadingSkeleton />
+                <LoadingSkeleton />
+                <LoadingSkeleton />
+              </>
+            )}
         </Grid>
-        <Grid item className={classes.paper} xl={12} sm={12} xs={12}>
-          {data.isFetchingUserRepos && (
-            <>
-              <LoadingSkeleton />
-              <LoadingSkeleton />
-              <LoadingSkeleton />
-              <LoadingSkeleton />
-              <LoadingSkeleton />
-            </>
-          )}
-        </Grid>
-        <Grid item className={classes.paper} xl={12} sm={12} xs={12}>
-          {data.userData.userApiReturn &&
-            data.userData.userApiReturn.length &&
-            data.userData.userApiReturn.map(item => {
-              return (
-                <RepositoryCard item={item} key={item.node_id} id={item.id} />
-              );
-            })}
-        </Grid>
+        {userSubmittedCredentials && (
+          <Grid item className={classes.paper} xl={12} sm={12} xs={12}>
+            {data.userData.userApiReturn &&
+              data.userData.userApiReturn.length &&
+              data.userData.userApiReturn.map(item => {
+                return (
+                  <RepositoryCard item={item} key={item.node_id} id={item.id} />
+                );
+              })}
+          </Grid>
+        )}
       </Grid>
     </>
   );

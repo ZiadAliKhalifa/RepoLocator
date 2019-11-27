@@ -105,7 +105,9 @@ const RepositoryCard = ({ item, loadRepositoryInfo, loadRepositoryReadme }) => {
             marginBottom: "1rem"
           }}
         >
-          {item.description}
+          {item.description
+            ? item.description
+            : "This Repository does not have a description"}
         </Typography>
       </CardContent>
       <CardActions disableSpacing style={{ marginTop: "-2rem" }}>

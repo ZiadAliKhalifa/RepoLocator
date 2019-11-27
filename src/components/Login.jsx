@@ -26,10 +26,19 @@ const useStyles = makeStyles(theme => ({
   },
   menu: {
     width: 200
+  },
+  centerText: {
+    textAlign: "center",
+    alignSelf: "center"
   }
 }));
 
-const Login = ({ data, getUserRepos, setUserToken }) => {
+const Login = ({
+  data,
+  getUserRepos,
+  setUserToken,
+  setUserSubmittedCredentials
+}) => {
   const classes = useStyles();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -44,6 +53,8 @@ const Login = ({ data, getUserRepos, setUserToken }) => {
 
     //valid username and password
     let basicToken = btoa(username + ":" + password);
+    setUserSubmittedCredentials(true);
+
     // setUserToken(basicToken);
     getUserRepos(basicToken);
   };
@@ -51,7 +62,12 @@ const Login = ({ data, getUserRepos, setUserToken }) => {
   return (
     <>
       <Grid item sm={12} xs={12} m={12}>
-        <Typography variant="h6" color="primary" component="p">
+        <Typography
+          variant="h6"
+          color="primary"
+          component="p"
+          className={classes.centerText}
+        >
           Github Credentials
         </Typography>
       </Grid>
@@ -83,7 +99,12 @@ const Login = ({ data, getUserRepos, setUserToken }) => {
         />
       </Grid>
 
-      <Grid item sm={12} style={{ marginTop: "2rem" }}>
+      <Grid
+        item
+        sm={12}
+        style={{ marginTop: "2rem" }}
+        className={classes.centerText}
+      >
         <Button
           variant="contained"
           color="primary"
