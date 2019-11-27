@@ -10,24 +10,14 @@ function App() {
     <>
       <Router>
         <HeaderBar />
-        <div>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/my-repos">My Repositories</Link>
-            </li>
-          </ul>
-          <Switch>
-            <Route path="/my-repos">
-              <MyRepositories />
-            </Route>
-            <Route path="/" exact>
-              <SearchComponent />
-            </Route>
-          </Switch>
-        </div>
+        <Switch>
+          <Route path="/my-repos">
+            <MyRepositories />
+          </Route>
+          <Route path="/" exact>
+            <SearchComponent />
+          </Route>
+        </Switch>
       </Router>
     </>
   );
