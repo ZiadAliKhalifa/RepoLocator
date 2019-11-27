@@ -10,6 +10,10 @@ import { LoadingSpinner } from "./LoadingSpinner";
 import { loadRepositoryReadme } from "../redux/actions/readmeActions";
 
 const RepositoryInfo = ({ item, readmeObject, readmeText }) => {
+  function Image(props) {
+    return <img {...props} style={{ maxWidth: "100%" }} alt="Readme" />;
+  }
+
   return (
     <Grid
       container
@@ -62,6 +66,7 @@ const RepositoryInfo = ({ item, readmeObject, readmeText }) => {
             source={readmeText}
             skipHtml
             escapeHtml
+            renderers={{ image: Image }}
             // disallowedTypes={["image"]}
           />
         </Grid>
