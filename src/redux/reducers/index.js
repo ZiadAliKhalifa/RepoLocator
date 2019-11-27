@@ -3,7 +3,12 @@ const initialState = {
   isFetching: false,
   isError: false,
   pageNumber: 1,
-  searchPhrase: ""
+  searchPhrase: "",
+  userData: {
+    token: "",
+    userApiReturn: {},
+    userPageNumber: 1
+  }
 };
 
 const asyncReducer = (state = initialState, action) => {
@@ -14,7 +19,8 @@ const asyncReducer = (state = initialState, action) => {
         isFetching: true,
         isError: false,
         pageNumber: state.pageNumber,
-        searchPhrase: state.searchPhrase
+        searchPhrase: state.searchPhrase,
+        userData: { ...state.userData }
       });
 
     case "FETCHED_REPOS":
@@ -23,7 +29,8 @@ const asyncReducer = (state = initialState, action) => {
         isFetching: false,
         isError: false,
         pageNumber: state.pageNumber,
-        searchPhrase: state.searchPhrase
+        searchPhrase: state.searchPhrase,
+        userData: { ...state.userData }
       });
 
     case "RECEIVE_ERROR":
@@ -31,7 +38,8 @@ const asyncReducer = (state = initialState, action) => {
         isError: true,
         isFetching: false,
         pageNumber: state.pageNumber,
-        searchPhrase: state.searchPhrase
+        searchPhrase: state.searchPhrase,
+        userData: { ...state.userData }
       });
 
     case "SET_SEARCH_PHRASE":
