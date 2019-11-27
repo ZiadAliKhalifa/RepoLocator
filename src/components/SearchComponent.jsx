@@ -9,7 +9,7 @@ import NoReposFound from "./NoReposFound";
 import ApiFailure from "./ApiFailure";
 import LoadMore from "./LoadMore";
 import FrontPage from "./FrontPage";
-import LoadingSkeleton from "./LoadingSpinner";
+import { LoadingSkeleton } from "./LoadingSpinner";
 
 const useStyles = makeStyles(theme => ({
   root: {

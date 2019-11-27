@@ -6,7 +6,7 @@ import { Grid } from "@material-ui/core";
 import { Button } from "@material-ui/core";
 
 import Login from "./Login";
-import LoadingSkeleton from "../components/LoadingSpinner";
+import { LoadingSkeleton } from "../components/LoadingSpinner";
 import RepositoryCard from "../components/RepositoryCard";
 import NoReposFound from "./NoReposFound";
 
