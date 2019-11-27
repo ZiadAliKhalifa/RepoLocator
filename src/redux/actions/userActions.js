@@ -32,7 +32,7 @@ export const getUserRepos = token => {
           throw new Error("No repositories for this user!");
         } else {
           dispatch(recieve_user_repos(data));
-          console.timeEnd("User Repos API call took:  ");
+          console.timeEnd("User Repos API call took: ");
         }
       })
       .catch(err => dispatch(fail_user_repos()));
