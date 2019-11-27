@@ -8,6 +8,7 @@ import { Button } from "@material-ui/core";
 import Login from "./Login";
 import LoadingSkeleton from "../components/LoadingSpinner";
 import RepositoryCard from "../components/RepositoryCard";
+import NoReposFound from "./NoReposFound";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -74,6 +75,13 @@ const MyRepositories = ({ data }) => {
                   <RepositoryCard item={item} key={item.node_id} id={item.id} />
                 );
               })}
+          </Grid>
+        )}
+
+        {userSubmittedCredentials && (
+          <Grid item className={classes.paper} xl={12} sm={12} xs={12}>
+            {data.userData.userApiReturn &&
+              !data.userData.userApiReturn.length && <NoReposFound />}
           </Grid>
         )}
       </Grid>
