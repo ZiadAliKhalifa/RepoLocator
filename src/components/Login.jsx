@@ -43,7 +43,7 @@ const Login = ({
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleGoButtonClick = async () => {
+  const handleGoButtonClick = () => {
     if (username.length < 3 || password.length < 3) {
       toast.error("Username and password are invalid", {
         position: toast.POSITION.TOP_RIGHT
@@ -52,11 +52,10 @@ const Login = ({
     }
 
     //valid username and password
-    let basicToken = btoa(username + ":" + password);
+    let basicToken = username + ":" + password;
     setUserSubmittedCredentials(true);
 
-    // setUserToken(basicToken);
-    getUserRepos(basicToken);
+    getUserRepos(basicToken, data.userData.userPageNumber);
   };
 
   return (

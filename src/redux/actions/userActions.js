@@ -13,15 +13,15 @@ export const setUserToken = token => {
   store.dispatch(set_user_token(token));
 };
 
-export const getUserRepos = token => {
+export const getUserRepos = (token, userPageNumber) => {
   store.dispatch(fetch_user_repos());
-  return function(dispatch, getState) {
+  return function(dispatch) {
     console.time("User Repos API call took: ");
 
-    return fetch(`${URLs.GITHUB_USER_REPOS_URL}`, {
+    return fetch(`${URLs.GITHUB_USER_REPOS_URL}?page=${userPageNumber}`, {
       method: "get",
       headers: new Headers({
-        Authorization: "Basic " + token,
+        Authorization: "Basic " + btoa(token),
         "Content-Type": "application/json",
         accept: "application/json"
       })
