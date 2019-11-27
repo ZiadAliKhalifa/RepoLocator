@@ -32,14 +32,8 @@ export default function MyRepositories() {
   const [password, setPassword] = useState("");
 
   const handleGoButtonClick = () => {
-    if (username.length < 3) {
-      toast.error("Invalid Username!", {
-        position: toast.POSITION.TOP_RIGHT
-      });
-      return;
-    }
-    if (password.length < 3) {
-      toast.error("Invalid Password!", {
+    if (username.length < 3 || password.length < 3) {
+      toast.error("Username and password are invalid", {
         position: toast.POSITION.TOP_RIGHT
       });
       return;
@@ -78,6 +72,7 @@ export default function MyRepositories() {
               setUsername(e.target.value);
             }}
             margin="normal"
+            error={username.length < 3 && username !== ""}
           />
         </Grid>
         <Grid item sm={3}>
@@ -91,6 +86,7 @@ export default function MyRepositories() {
             }}
             autoComplete="current-password"
             margin="normal"
+            error={password.length < 3 && password !== ""}
           />
         </Grid>
 
