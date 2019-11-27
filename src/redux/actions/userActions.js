@@ -3,15 +3,8 @@ import URLs from "../../consts/URLs";
 import {
   fetch_user_repos,
   recieve_user_repos,
-  fail_user_repos,
-  increment_user_page_counter,
-  decrement_user_page_counter,
-  set_user_token
+  fail_user_repos
 } from "./actionCreators";
-
-export const setUserToken = token => {
-  store.dispatch(set_user_token(token));
-};
 
 export const getUserRepos = (token, userPageNumber) => {
   store.dispatch(fetch_user_repos());
@@ -37,12 +30,4 @@ export const getUserRepos = (token, userPageNumber) => {
       })
       .catch(err => dispatch(fail_user_repos()));
   };
-};
-
-export const incrementUserPageCounter = () => {
-  store.dispatch(increment_user_page_counter());
-};
-
-export const decrementUserPageCounter = () => {
-  store.dispatch(decrement_user_page_counter());
 };

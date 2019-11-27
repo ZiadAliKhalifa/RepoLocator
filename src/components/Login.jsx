@@ -9,7 +9,7 @@ import Typography from "@material-ui/core/Typography";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import { setUserToken, getUserRepos } from "../redux/actions/userActions";
+import { getUserRepos } from "../redux/actions/userActions";
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -33,12 +33,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Login = ({
-  data,
-  getUserRepos,
-  setUserToken,
-  setUserSubmittedCredentials
-}) => {
+const Login = ({ data, getUserRepos, setUserSubmittedCredentials }) => {
   const classes = useStyles();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -124,8 +119,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-  getUserRepos,
-  setUserToken
+  getUserRepos
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
