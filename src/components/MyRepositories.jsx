@@ -5,6 +5,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Grid } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -30,8 +32,24 @@ export default function MyRepositories() {
   const [password, setPassword] = useState("");
 
   const handleGoButtonClick = () => {
-    console.log(username);
-    console.log(password);
+    if (username.length < 3) {
+      toast.error("Invalid Username!", {
+        position: toast.POSITION.TOP_RIGHT
+      });
+      return;
+    }
+    if (password.length < 3) {
+      toast.error("Invalid Password!", {
+        position: toast.POSITION.TOP_RIGHT
+      });
+      return;
+    }
+
+    //valid username and password
+    let basicToken = btoa(username.toLowerCase + ":" + password);
+    console.log(basicToken);
+
+    
   };
 
   // Story575}Deep}King
@@ -86,6 +104,7 @@ export default function MyRepositories() {
           </Button>
         </Grid>
       </Grid>
+      <ToastContainer />
     </>
   );
 }
