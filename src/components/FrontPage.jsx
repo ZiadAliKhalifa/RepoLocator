@@ -9,7 +9,7 @@ export default function FrontPage() {
         <KeyboardIcon fontSize="large" color="primary" />
       </Grid>
       <Grid item sm={11}>
-        <h2>Just type in a repo name</h2>
+        <h2>Just type in a repository name</h2>
       </Grid>
     </Grid>
   );

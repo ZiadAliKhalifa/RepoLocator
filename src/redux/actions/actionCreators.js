@@ -69,3 +69,41 @@ export const fail_readme_download = () => {
     type: "FAIL_README_DOWNLOAD"
   };
 };
+
+export const fetch_user_repos = () => {
+  return {
+    type: "FETCH_USER_REPOS"
+  };
+};
+
+export const recieve_user_repos = repos => {
+  return {
+    type: "RECIEVE_USER_REPOS",
+    data: repos
+  };
+};
+
+export const fail_user_repos = () => {
+  return {
+    type: "FAIL_USER_REPOS"
+  };
+};
+
+export const increment_user_page_counter = () => {
+  return {
+    type: "INCREMENT_USER_PAGE_COUNTER"
+  };
+};
+
+export const decrement_user_page_counter = () => {
+  return {
+    type: "DECREMENT_USER_PAGE_COUNTER"
+  };
+};
+
+export const set_user_token = token => {
+  return {
+    type: "SET_USER_TOKEN",
+    data: token
+  };
+};
