@@ -59,21 +59,6 @@ const asyncReducer = (state = initialState, action) => {
       stateToDec.pageNumber = stateToDec.pageNumber - 1;
       return Object.assign({}, state, stateToDec);
 
-    case "INCREMENT_USER_PAGE_COUNTER":
-      let stateToIncrementUserPageCntr = { ...state };
-      stateToIncrementUserPageCntr = state.userData.userPageNumber + 1;
-      return Object.assign({}, state, stateToIncrementUserPageCntr);
-
-    case "DECREMENT_USER_PAGE_COUNTER":
-      let stateToDecrementUserPageCntr = { ...state };
-      stateToDecrementUserPageCntr = state.userData.userPageNumber - 1;
-      return Object.assign({}, state, stateToDecrementUserPageCntr);
-
-    case "SET_USER_TOKEN":
-      let stateToChangeToken = { ...state };
-      stateToChangeToken.userData.token = action.data;
-      return Object.assign({}, state, stateToChangeToken);
-
     case "FETCH_USER_REPOS":
       let stateLoadingUserRepos = { ...state };
       stateLoadingUserRepos.userData.isFetchingUserRepos = true;
