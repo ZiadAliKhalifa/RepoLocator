@@ -62,7 +62,7 @@ const RepositoryInfo = ({ item, readmeObject, readmeText }) => {
             source={readmeText}
             skipHtml
             escapeHtml
-            disallowedTypes={["image"]}
+            // disallowedTypes={["image"]}
           />
         </Grid>
       )}

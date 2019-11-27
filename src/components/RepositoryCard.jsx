@@ -23,8 +23,8 @@ import { loadRepositoryReadme } from "../redux/actions/readmeActions";
 
 const useStyles = makeStyles(theme => ({
   card: {
-    maxWidth: 900,
-    width: 900,
+    maxWidth: 1200,
+    width: 1200,
     zIndex: 900,
     margin: 15,
     border: "1px solid #e8e8e8"
