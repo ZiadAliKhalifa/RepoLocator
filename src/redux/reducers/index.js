@@ -7,7 +7,9 @@ const initialState = {
   userData: {
     token: "",
     userApiReturn: {},
-    userPageNumber: 1
+    userPageNumber: 1,
+    isFetchingUserRepos: true,
+    isErrorUserRepos: false
   }
 };
 
@@ -56,6 +58,41 @@ const asyncReducer = (state = initialState, action) => {
       let stateToDec = { ...state };
       stateToDec.pageNumber = stateToDec.pageNumber - 1;
       return Object.assign({}, state, stateToDec);
+
+    case "INCREMENT_USER_PAGE_COUNTER":
+      let stateToIncrementUserPageCntr = { ...state };
+      stateToIncrementUserPageCntr = state.userData.userPageNumber + 1;
+      return Object.assign({}, state, stateToIncrementUserPageCntr);
+
+    case "DECREMENT_USER_PAGE_COUNTER":
+      let stateToDecrementUserPageCntr = { ...state };
+      stateToDecrementUserPageCntr = state.userData.userPageNumber - 1;
+      return Object.assign({}, state, stateToDecrementUserPageCntr);
+
+    case "SET_USER_TOKEN":
+      let stateToChangeToken = { ...state };
+      stateToChangeToken.userData.token = action.data;
+      return Object.assign({}, state, stateToChangeToken);
+
+    case "FETCH_USER_REPOS":
+      let stateLoadingUserRepos = { ...state };
+      stateLoadingUserRepos.userData.isFetchingUserRepos = true;
+      return Object.assign({}, state, stateLoadingUserRepos);
+
+    case "RECIEVE_USER_REPOS":
+      let stateWithUserRepos = { ...state };
+      stateWithUserRepos.userData.userApiReturn = action.data;
+      stateWithUserRepos.userData.isFetchingUserRepos = false;
+      stateWithUserRepos.userData.isErrorUserRepos = false;
+      console.log(stateWithUserRepos);
+
+      return Object.assign({}, state, stateWithUserRepos);
+
+    case "FAIL_USER_REPOS":
+      let stateWithUserReposFail = { ...state };
+      stateWithUserReposFail.userData.isFetchingUserRepos = false;
+      stateWithUserReposFail.userData.isErrorUserRepos = true;
+      return Object.assign({}, state, stateWithUserReposFail);
 
     default:
       return state;

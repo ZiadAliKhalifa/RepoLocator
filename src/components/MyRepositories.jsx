@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
@@ -7,6 +8,8 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
+import { getUserRepos } from "../redux/actions/userActions";
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -26,12 +29,12 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function MyRepositories() {
+const MyRepositories = ({ data, getUserRepos }) => {
   const classes = useStyles();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleGoButtonClick = () => {
+  const handleGoButtonClick = async () => {
     if (username.length < 3 || password.length < 3) {
       toast.error("Username and password are invalid", {
         position: toast.POSITION.TOP_RIGHT
@@ -40,12 +43,12 @@ export default function MyRepositories() {
     }
 
     //valid username and password
-    let basicToken = btoa(username.toLowerCase + ":" + password);
-    console.log(basicToken);
+    let basicToken = btoa(username + ":" + password);
 
-    
+    getUserRepos(basicToken);
   };
 
+  console.log(data);
   // Story575}Deep}King
 
   return (
@@ -103,4 +106,16 @@ export default function MyRepositories() {
       <ToastContainer />
     </>
   );
-}
+};
+
+const mapStateToProps = state => {
+  return {
+    data: state
+  };
+};
+
+const mapDispatchToProps = {
+  getUserRepos
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MyRepositories);
