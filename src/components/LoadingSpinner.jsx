@@ -8,7 +8,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 export function LoadingSkeleton() {
   return (
     <Grid item xl={12} sm={12} xs={12}>
-      <Skeleton variant="rect" width={900} height={130} />
+      <Skeleton variant="rect" width={1200} height={140} />
       <Box pt={0.5}>
         <Skeleton />
         <Skeleton width="60%" />
