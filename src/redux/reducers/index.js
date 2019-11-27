@@ -8,7 +8,7 @@ const initialState = {
     token: "",
     userApiReturn: {},
     userPageNumber: 1,
-    isFetchingUserRepos: true,
+    isFetchingUserRepos: false,
     isErrorUserRepos: false
   }
 };
@@ -84,7 +84,6 @@ const asyncReducer = (state = initialState, action) => {
       stateWithUserRepos.userData.userApiReturn = action.data;
       stateWithUserRepos.userData.isFetchingUserRepos = false;
       stateWithUserRepos.userData.isErrorUserRepos = false;
-      console.log(stateWithUserRepos);
 
       return Object.assign({}, state, stateWithUserRepos);
 

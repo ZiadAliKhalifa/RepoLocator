@@ -48,59 +48,49 @@ const Login = ({ data, getUserRepos, setUserToken }) => {
     getUserRepos(basicToken);
   };
 
-  // Story575}Deep}King
-
   return (
     <>
-      <Grid
-        container
-        justify="center"
-        spacing={0}
-        direction="column"
-        alignItems="center"
-      >
-        <Grid item sm={12} xs={12} m={12}>
-          <Typography variant="h6" color="textPrimary" component="p">
-            Github Credentials
-          </Typography>
-        </Grid>
-        <Grid item sm={3}>
-          <TextField
-            id="standard-name"
-            label="Username"
-            className={classes.textField}
-            value={username}
-            onChange={e => {
-              setUsername(e.target.value);
-            }}
-            margin="normal"
-            error={username.length < 3 && username !== ""}
-          />
-        </Grid>
-        <Grid item sm={3}>
-          <TextField
-            id="standard-password-input"
-            label="Password"
-            className={classes.textField}
-            type="password"
-            onChange={e => {
-              setPassword(e.target.value);
-            }}
-            autoComplete="current-password"
-            margin="normal"
-            error={password.length < 3 && password !== ""}
-          />
-        </Grid>
+      <Grid item sm={12} xs={12} m={12}>
+        <Typography variant="h6" color="primary" component="p">
+          Github Credentials
+        </Typography>
+      </Grid>
+      <Grid item sm={3}>
+        <TextField
+          id="standard-name"
+          label="Username"
+          className={classes.textField}
+          value={username}
+          onChange={e => {
+            setUsername(e.target.value);
+          }}
+          margin="normal"
+          error={username.length < 3 && username !== ""}
+        />
+      </Grid>
+      <Grid item sm={3}>
+        <TextField
+          id="standard-password-input"
+          label="Password"
+          className={classes.textField}
+          type="password"
+          onChange={e => {
+            setPassword(e.target.value);
+          }}
+          autoComplete="current-password"
+          margin="normal"
+          error={password.length < 3 && password !== ""}
+        />
+      </Grid>
 
-        <Grid item sm={12} style={{ marginTop: "2rem" }}>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={handleGoButtonClick}
-          >
-            Go!
-          </Button>
-        </Grid>
+      <Grid item sm={12} style={{ marginTop: "2rem" }}>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleGoButtonClick}
+        >
+          Go!
+        </Button>
       </Grid>
       <ToastContainer />
     </>
