@@ -1,7 +1,5 @@
 # RepoLocator
 
-### An app made with :heart: by a potential brick!
-
 ### `Search through GitHub`
 
 Just type in the name of the public repository and <br> the app searches on its own
